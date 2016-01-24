@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../share/_layout.xhtml">
+        <ui:define name="title">
+            All User
+        </ui:define>
+        <ui:define name="content">
+            <h:dataTable var="users" value="#{accountController.allUsers}">
+                <h:column>
+                    <f:facet name="header">
+                        Username
+                    </f:facet>
+                    <h:outputText value="#{users.username}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        First Name
+                    </f:facet>
+                    <h:outputText value="#{users.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Last Name
+                    </f:facet>
+                    <h:outputText value="#{users.lastName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Gender
+                    </f:facet>
+                    <h:outputText value="#{users.gender}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Phone number
+                    </f:facet>
+                    <h:outputText value="#{users.phonenumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Email
+                    </f:facet>
+                    <h:outputText value="#{users.email}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <h:commandButton value="Delete" action="#{accountController.deleteUser(users.id)}"/>
+                    <h:button value="Detail" outcome="/faces/user/profile/userprofile?uid=#{users.id}"/>
+                    <h:button value="Change user subscription" outcome="/faces/admin/changeUserSubscription?uid=#{users.id}"/>
+                    <h:button value="View Receipt" outcome="/faces/admin/listuserreceipt?uid=#{users.id}"/>
+                </h:column>
+            </h:dataTable>
+        </ui:define>
+    </ui:composition>
+</html>
+

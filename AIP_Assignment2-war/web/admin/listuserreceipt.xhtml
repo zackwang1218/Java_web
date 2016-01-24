@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewAction action="#{accountController.setAccount(param.uid)}"/>
+    </f:metadata>
+    <ui:composition template="../share/_layout.xhtml">
+        <ui:define name="title">
+            User Receipt
+        </ui:define>
+        <ui:define name="content">
+            <h2>#{accountController.account.firstName} Charge Receipt</h2>
+            <h:dataTable var="receipt" value="#{accountController.userReceipt}" >
+                <h:column>
+                    <f:facet name="header">
+                        Amount
+                    </f:facet>
+                    <h:outputText value="#{receipt.amount}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Currency
+                    </f:facet>
+                    <h:outputText value="#{receipt.currency}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Issue date
+                    </f:facet>
+                    <h:outputText value="#{receipt.created_at}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Description
+                    </f:facet>
+                    <h:outputText value="#{receipt.description}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        IP Address
+                    </f:facet>
+                    <h:outputText value="#{receipt.ip_address}"/>
+                </h:column>
+            </h:dataTable>
+        </ui:define>
+    </ui:composition>
+</html>
+

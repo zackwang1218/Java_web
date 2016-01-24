@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="../share/_layout.xhtml">
+        <ui:define name="title">
+            Regist New User
+        </ui:define>
+        <ui:define name="content">
+            <h2>Add New User</h2>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>Username:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputText 
+                                id="username"
+                                value="#{accountController.account.username}"
+                                required="true" 
+                                requiredMessage="Please type no less than 3, no more than 20 characters for Username"/>
+                        </td>
+                        <td>
+                            <h:message for="username" style="color: red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputSecret 
+                                id="password"
+                                value="#{accountController.account.password}" 
+                                required="true" 
+                                requiredMessage="Password is required"/>
+                        </td>
+                        <td>
+                            <h:message for="password" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First Name:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputText 
+                                id="firstname"
+                                value="#{accountController.account.firstName}" 
+                                required="true" 
+                                requiredMessage="Firstname is required"/>
+                        </td>
+                        <td>
+                            <h:message for="firstname" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputText 
+                                id="lastname"
+                                value="#{accountController.account.lastName}" 
+                                required="true" 
+                                requiredMessage="Lastname is required" />
+                        </td>
+                        <td>
+                            <h:message for="lastname" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputText 
+                                id="email"
+                                value="#{accountController.account.email}" />
+                        </td>
+                        <td>
+                            <h:message for="email" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Subscription plan: </td>
+                        <td colspan="2">
+                            <h:selectOneMenu value="#{accountController.service.name}">
+                                <f:selectItems value="#{accountController.serviceTypes}" var="name"
+                                               itemValue="#{accountController.service.name}" itemLabel="#{name.label}"/>
+                            </h:selectOneMenu>
+<!--                            <h:selectOneMenu value="#{accountController.serviceType}">
+                                <f:selectItem itemValue="FREE"/>
+                                <f:selectItem itemValue="STANDARD"/>
+                                <f:selectItem itemValue="PREMIUM"/>
+                            </h:selectOneMenu>-->
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Card Number: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.number}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Expiry_month: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.expiry_month}" p:placeholder="01"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Expiry_year: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.expiry_year}" p:placeholder="2015"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CVC: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.cvc}" p:placeholder="000"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Holder Name: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.name}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Address: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.address_line1}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>City: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.address_city}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Country: <span style="color:red">*</span> </td>
+                        <td colspan="2">
+                            <h:inputText value="#{accountController.card.address_country}"/>
+                        </td>
+                    </tr>
+<!--                    <h:panelGroup rendered="#{accountController.serviceType == 'premium'}">
+
+                </h:panelGroup>-->
+
+
+                    <!--                    <tr>
+                                            <td>Duration(In Month): </td>
+                                            <td>
+                                                <h:selectOneMenu value="#{accountController.serviceDuration}">
+                                                    <f:selectItem itemValue="3"/>
+                                                    <f:selectItem itemValue="6"/>
+                                                    <f:selectItem itemValue="12"/>
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>-->
+                    <tr>
+                        <td colspan="2"><h:commandButton value="Add User" action="#{accountController.addUser}"/> </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

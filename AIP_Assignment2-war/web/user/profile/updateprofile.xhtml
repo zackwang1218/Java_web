@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewAction action="#{accountController.setAccount(param.uid)}"/>
+    </f:metadata>
+    <ui:composition template="../../share/_layout.xhtml">
+        <ui:define name="title">
+            Update Profile
+        </ui:define>
+        <ui:define name="content">
+            <h2>Update Profile</h2>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>Username: </td>
+                        <td><h:outputText value="#{accountController.account.username}"/></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>First Name: </td>
+                        <td>
+                            <h:inputText 
+                                id="u_firstname"
+                                value="#{accountController.account.firstName}"
+                                required="true" 
+                                requiredMessage="Firstname is required" >
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="u_firstname" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name: </td>
+                        <td>
+                            <h:inputText 
+                                id="u_lastname"
+                                value="#{accountController.account.lastName}"
+                                required="true" 
+                                requiredMessage="Lastname is required" >
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="u_lastname" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gender: </td>
+                        <td>
+                            <h:selectOneMenu 
+                                value="#{accountController.account.gender}">
+                                <f:selectItem itemValue="Male" itemLabel="Male" />
+                                <f:selectItem itemValue="Female" itemLabel="Female" />
+                            </h:selectOneMenu>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phone: </td>
+                        <td><h:inputText 
+                                id="u_phone"
+                                value="#{accountController.account.phonenumber}">
+                            </h:inputText>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td><h:inputText 
+                                id="u_email"
+                                value="#{accountController.account.email}"
+                                validatorMessage="Not a proper email address format" >
+                            </h:inputText>
+                        </td>
+                        <td>
+                            <h:message for="u_email" style="color: red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <h:inputHidden value="#{accountController.account.id}"></h:inputHidden>
+                            <h:inputHidden value="#{accountController.account.username}"></h:inputHidden>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="3">
+                            <h:link value="Back to Home" outcome="/faces/index?faces-redirect=true"/> 
+                            &nbsp;&nbsp;&nbsp;
+                            <h:link value="Reset Password" outcome="/faces/user/profile/password?uid=#{accountController.account.id}"/>
+                            
+                            &nbsp;&nbsp;&nbsp;
+                            <h:commandButton value="Confirm Update" action="#{accountController.updateProfile()}"/> 
+                        </td>
+                    </tr>
+
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

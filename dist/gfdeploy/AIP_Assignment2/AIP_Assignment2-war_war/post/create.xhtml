@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <f:metadata>
+        <f:viewAction action="#{postController.account.setId(param.uid)}"/>
+    </f:metadata>
+    <ui:composition template="../share/_layout.xhtml">
+        <ui:define name="title">
+            New advertisement
+        </ui:define>
+        <ui:define name="content">
+            <h2>Create a new advertisement</h2>
+            <h:form>
+                <table>
+                    <tr>
+                        <td style="width: 120px;">Type: </td>
+                        <td colspan="2">
+                            <h:selectOneMenu value="#{postController.post.posttype}">
+                                <f:selectItems value="#{postController.postType}" var="posttype" itemValue="#{postController.post.posttype}" itemLabel="#{posttype.label}"/>
+                            </h:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Subject:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputText 
+                                id ="subject"
+                                style="width:250px;"
+                                value="#{postController.post.subject}"
+                                />
+                        </td>
+                        <td>
+                            <h:message for="subject" style="color:red" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: top">Content:<span style="color:red">*</span> </td>
+                        <td>
+                            <h:inputTextarea style="resize: none; width: 600px; height: 200px;"
+                                             id ="content"
+                                             value="#{postController.post.content}"
+                                             />
+                        </td>
+                        <td>
+                            <h:message for="content" style="color:red" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td colspan="2">
+                            <h:inputText
+                                style="width:250px;"
+                                value="#{postController.post.email}" 
+                                p:placeholder="Leave empty to use your own email"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Sticky:" rendered="#{postController.maxiumStickyPost}"/> </td>
+                        <td colspan="2">
+                            <h:selectBooleanCheckbox value="#{postController.post.issticky}" rendered="#{postController.maxiumStickyPost}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:inputHidden value="#{postController.account.id}" />
+                        </td>
+                        <td colspan="2">
+                            <h:commandButton value="Create" action="#{postController.addPost()}"/>
+                            &nbsp;&nbsp;
+                            <h:link value="back" outcome="/post/postlist?faces-redirect=true" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
